@@ -31,15 +31,30 @@ namespace SocketSiemens
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.textShow4 = new SocketSiemens.TextShow();
+            this.textShow3 = new SocketSiemens.TextShow();
+            this.textShow2 = new SocketSiemens.TextShow();
+            this.textShow1 = new SocketSiemens.TextShow();
             this.label2 = new System.Windows.Forms.Label();
             this.Porttextbox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.IPtextbox = new System.Windows.Forms.TextBox();
             this.btnConnect = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.textShow1 = new SocketSiemens.TextShow();
+            this.textShow5 = new SocketSiemens.TextShow();
+            this.textShow6 = new SocketSiemens.TextShow();
+            this.textShow7 = new SocketSiemens.TextShow();
+            this.textShow8 = new SocketSiemens.TextShow();
+            this.label3 = new System.Windows.Forms.Label();
+            this.SCPortTextBox = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.SclintIPTextbox = new System.Windows.Forms.TextBox();
+            this.SlientBtn = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -55,6 +70,11 @@ namespace SocketSiemens
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage1.Controls.Add(this.textBox1);
+            this.tabPage1.Controls.Add(this.button1);
+            this.tabPage1.Controls.Add(this.textShow4);
+            this.tabPage1.Controls.Add(this.textShow3);
+            this.tabPage1.Controls.Add(this.textShow2);
             this.tabPage1.Controls.Add(this.textShow1);
             this.tabPage1.Controls.Add(this.label2);
             this.tabPage1.Controls.Add(this.Porttextbox);
@@ -67,7 +87,51 @@ namespace SocketSiemens
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(577, 294);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "SocketServer";
+            this.tabPage1.Text = "SocketClient";
+            // 
+            // textShow4
+            // 
+            this.textShow4.Datatype = thinger.cn.DataConvertHelper.DataType.Float;
+            this.textShow4.Location = new System.Drawing.Point(93, 174);
+            this.textShow4.Name = "textShow4";
+            this.textShow4.Offset = 0;
+            this.textShow4.Size = new System.Drawing.Size(149, 28);
+            this.textShow4.Start = 12;
+            this.textShow4.TabIndex = 8;
+            this.textShow4.VarValue = null;
+            // 
+            // textShow3
+            // 
+            this.textShow3.Datatype = thinger.cn.DataConvertHelper.DataType.Float;
+            this.textShow3.Location = new System.Drawing.Point(93, 140);
+            this.textShow3.Name = "textShow3";
+            this.textShow3.Offset = 0;
+            this.textShow3.Size = new System.Drawing.Size(149, 28);
+            this.textShow3.Start = 8;
+            this.textShow3.TabIndex = 7;
+            this.textShow3.VarValue = null;
+            // 
+            // textShow2
+            // 
+            this.textShow2.Datatype = thinger.cn.DataConvertHelper.DataType.Float;
+            this.textShow2.Location = new System.Drawing.Point(93, 106);
+            this.textShow2.Name = "textShow2";
+            this.textShow2.Offset = 0;
+            this.textShow2.Size = new System.Drawing.Size(149, 28);
+            this.textShow2.Start = 4;
+            this.textShow2.TabIndex = 6;
+            this.textShow2.VarValue = null;
+            // 
+            // textShow1
+            // 
+            this.textShow1.Datatype = thinger.cn.DataConvertHelper.DataType.Float;
+            this.textShow1.Location = new System.Drawing.Point(93, 72);
+            this.textShow1.Name = "textShow1";
+            this.textShow1.Offset = 0;
+            this.textShow1.Size = new System.Drawing.Size(149, 28);
+            this.textShow1.Start = 0;
+            this.textShow1.TabIndex = 5;
+            this.textShow1.VarValue = null;
             // 
             // label2
             // 
@@ -115,24 +179,127 @@ namespace SocketSiemens
             // 
             // tabPage2
             // 
+            this.tabPage2.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage2.Controls.Add(this.textShow5);
+            this.tabPage2.Controls.Add(this.textShow6);
+            this.tabPage2.Controls.Add(this.textShow7);
+            this.tabPage2.Controls.Add(this.textShow8);
+            this.tabPage2.Controls.Add(this.label3);
+            this.tabPage2.Controls.Add(this.SCPortTextBox);
+            this.tabPage2.Controls.Add(this.label4);
+            this.tabPage2.Controls.Add(this.SclintIPTextbox);
+            this.tabPage2.Controls.Add(this.SlientBtn);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(577, 294);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "SocketClint";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tabPage2.Text = "SocketServer";
             // 
-            // textShow1
+            // textShow5
             // 
-            this.textShow1.Datatype = thinger.cn.DataConvertHelper.DataType.Float;
-            this.textShow1.Location = new System.Drawing.Point(93, 126);
-            this.textShow1.Name = "textShow1";
-            this.textShow1.Offset = 0;
-            this.textShow1.Size = new System.Drawing.Size(149, 28);
-            this.textShow1.Start = 0;
-            this.textShow1.TabIndex = 5;
-            this.textShow1.VarValue = null;
+            this.textShow5.Datatype = thinger.cn.DataConvertHelper.DataType.Int;
+            this.textShow5.Location = new System.Drawing.Point(103, 200);
+            this.textShow5.Name = "textShow5";
+            this.textShow5.Offset = 0;
+            this.textShow5.Size = new System.Drawing.Size(149, 28);
+            this.textShow5.Start = 10;
+            this.textShow5.TabIndex = 13;
+            this.textShow5.VarValue = null;
+            // 
+            // textShow6
+            // 
+            this.textShow6.Datatype = thinger.cn.DataConvertHelper.DataType.Float;
+            this.textShow6.Location = new System.Drawing.Point(103, 166);
+            this.textShow6.Name = "textShow6";
+            this.textShow6.Offset = 0;
+            this.textShow6.Size = new System.Drawing.Size(149, 28);
+            this.textShow6.Start = 6;
+            this.textShow6.TabIndex = 12;
+            this.textShow6.VarValue = null;
+            // 
+            // textShow7
+            // 
+            this.textShow7.Datatype = thinger.cn.DataConvertHelper.DataType.Bool;
+            this.textShow7.Location = new System.Drawing.Point(103, 132);
+            this.textShow7.Name = "textShow7";
+            this.textShow7.Offset = 0;
+            this.textShow7.Size = new System.Drawing.Size(149, 28);
+            this.textShow7.Start = 4;
+            this.textShow7.TabIndex = 11;
+            this.textShow7.VarValue = null;
+            // 
+            // textShow8
+            // 
+            this.textShow8.Datatype = thinger.cn.DataConvertHelper.DataType.Float;
+            this.textShow8.Location = new System.Drawing.Point(103, 98);
+            this.textShow8.Name = "textShow8";
+            this.textShow8.Offset = 0;
+            this.textShow8.Size = new System.Drawing.Size(149, 28);
+            this.textShow8.Start = 0;
+            this.textShow8.TabIndex = 10;
+            this.textShow8.VarValue = null;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(254, 28);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(65, 12);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "PLC-端口号";
+            // 
+            // SCPortTextBox
+            // 
+            this.SCPortTextBox.Location = new System.Drawing.Point(325, 25);
+            this.SCPortTextBox.Name = "SCPortTextBox";
+            this.SCPortTextBox.Size = new System.Drawing.Size(134, 21);
+            this.SCPortTextBox.TabIndex = 8;
+            this.SCPortTextBox.Text = "2000";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(32, 26);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(65, 12);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "PLC-IP地址";
+            // 
+            // SclintIPTextbox
+            // 
+            this.SclintIPTextbox.Location = new System.Drawing.Point(103, 23);
+            this.SclintIPTextbox.Name = "SclintIPTextbox";
+            this.SclintIPTextbox.Size = new System.Drawing.Size(134, 21);
+            this.SclintIPTextbox.TabIndex = 6;
+            this.SclintIPTextbox.Text = "192.168.0.100";
+            // 
+            // SlientBtn
+            // 
+            this.SlientBtn.Location = new System.Drawing.Point(465, 23);
+            this.SlientBtn.Name = "SlientBtn";
+            this.SlientBtn.Size = new System.Drawing.Size(75, 23);
+            this.SlientBtn.TabIndex = 5;
+            this.SlientBtn.Text = "启动服务";
+            this.SlientBtn.UseVisualStyleBackColor = true;
+            this.SlientBtn.Click += new System.EventHandler(this.SlientBtn_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(455, 174);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 9;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(430, 140);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 21);
+            this.textBox1.TabIndex = 10;
             // 
             // SocketForm
             // 
@@ -141,10 +308,12 @@ namespace SocketSiemens
             this.ClientSize = new System.Drawing.Size(584, 317);
             this.Controls.Add(this.tabControl1);
             this.Name = "SocketForm";
-            this.Text = "Form1";
+            this.Text = "Socket";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -160,6 +329,20 @@ namespace SocketSiemens
         private System.Windows.Forms.TextBox IPtextbox;
         private System.Windows.Forms.Button btnConnect;
         private TextShow textShow1;
+        private TextShow textShow4;
+        private TextShow textShow3;
+        private TextShow textShow2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox SCPortTextBox;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox SclintIPTextbox;
+        private System.Windows.Forms.Button SlientBtn;
+        private TextShow textShow5;
+        private TextShow textShow6;
+        private TextShow textShow7;
+        private TextShow textShow8;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 
