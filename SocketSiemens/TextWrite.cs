@@ -11,9 +11,9 @@ using thinger.cn.DataConvertHelper;
 
 namespace SocketSiemens
 {
-    public partial class TextShow : UserControl
+    public partial class TextWrite : UserControl
     {
-        public TextShow()
+        public TextWrite()
         {
             InitializeComponent();
         }
@@ -22,20 +22,26 @@ namespace SocketSiemens
 
         public int Offset { get; set; }
 
-        public DataType Datatype { get; set; }
-
-       
+        public Parse Datatype { get; set; }
         public string VarValue
         {
-            get { return this.textBox1.Text; }
-            set { 
-
+            get { return this.textBox1.Text;}
+            set
+            {
+                
                 this.textBox1.Text = value;
             }
-            
+
+
         }
 
+        public enum Parse
+        {
+            Bool = 0,
+            Short = 1,
+            Int = 2,
+            Float = 3,
+            Uint = 4
+        }
     }
-
-   
 }

@@ -63,6 +63,13 @@
     <Compile Include="TextShow.Designer.cs">
       <DependentUpon>TextShow.cs</DependentUpon>
     </Compile>
+    <Compile Include="TextWrite.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TextWrite.Designer.cs">
+      <DependentUpon>TextWrite.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StrToByte.cs" />
     <EmbeddedResource Include="SocketForm.resx">
       <DependentUpon>SocketForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -77,6 +84,9 @@
     </Compile>
     <EmbeddedResource Include="TextShow.resx">
       <DependentUpon>TextShow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TextWrite.resx">
+      <DependentUpon>TextWrite.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

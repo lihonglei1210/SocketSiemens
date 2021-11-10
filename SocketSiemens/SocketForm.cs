@@ -24,17 +24,17 @@ namespace SocketSiemens
 
         #region Server
 
-       
+
         //创建Socket
         private Socket tcpClient;
 
         //创建取消Client数据源
         private CancellationTokenSource ctsClient;
-       
+
         private void btnConnect_Click(object sender, EventArgs e)
         {
-            
-            if(this.btnConnect.Text=="连接")
+
+            if (this.btnConnect.Text == "连接")
             {
 
                 //实例化Socket
@@ -48,41 +48,72 @@ namespace SocketSiemens
                 {
                     tcpClient.Connect(EP);
                     MessageBox.Show("连接成功");
-                     this.btnConnect.Text ="断开";
-                    
+                    this.btnConnect.Text = "断开";
+
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("连接失败" + ex.Message);
-                    
+
                 }
 
-               
-               
+
+
                 Task.Run(new Action(() =>
                 {
                     GetPLCVaiue();
-                    
-                }
 
-                
+                }
                 ));
             }
             else
             {
                 tcpClient.Close();
-                ctsClient.Cancel(); 
+                ctsClient.Cancel();
+
                 this.btnConnect.Text = "连接";
 
             }
-           
+
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            byte[] buffer = new byte[4];
-            buffer= System.Text.Encoding.Default.GetBytes (textBox1.Text );
-            tcpClient.Send(buffer, SocketFlags.None);
+            Task.Run(new Action(() =>
+            {
+
+                SetPLCvaiue();
+            }
+            ));
+
+
+        }
+
+        private void SetPLCvaiue()
+        {
+            byte[] Summary_buffer = new byte[20];
+            byte[] buffer = { 0, 0, 0, 0 };
+            StrToByte data = new StrToByte();
+            foreach (Control item in this.tabPage1.Controls)
+            {
+                if (item is TextWrite Is)
+                {
+                    if (Is.VarValue != "")
+                    {
+                        buffer = data.StringTobyte(Is.Datatype, Is.VarValue);
+                        for (int i = 0; i < buffer.Length; i++)
+                        {
+                            Summary_buffer[Is.Start + i] = buffer[i];
+
+                        }
+                    }
+
+                }
+
+            }
+            tcpClient.Send(Summary_buffer, SocketFlags.None);
+
+
         }
 
         private void GetPLCVaiue()
@@ -145,10 +176,10 @@ namespace SocketSiemens
                     ));
                 }
             }
-           
-               
 
-            
+
+
+
         }
 
 
@@ -163,7 +194,7 @@ namespace SocketSiemens
 
         private void SlientBtn_Click(object sender, EventArgs e)
         {
-             if(this.SlientBtn.Text=="启动服务")
+            if (this.SlientBtn.Text == "启动服务")
             {
                 ctsServer = new CancellationTokenSource();
 
@@ -177,6 +208,7 @@ namespace SocketSiemens
                     MessageBox.Show("服务开启成功");
                     SlientBtn.Text = "关闭服务";
                     TCPserver.Listen(5);
+                    
                 }
                 catch (Exception ex)
                 {
@@ -189,7 +221,7 @@ namespace SocketSiemens
 
 
                 }));
-                
+
             }
             else
             {
@@ -199,16 +231,16 @@ namespace SocketSiemens
 
             }
 
-          
-        }
 
-       private void ListenConnection()
+        }
+        private Socket TcpserverAccept;
+        private void ListenConnection()
         {
             while (!ctsServer.IsCancellationRequested)
             {
                 try
                 {
-                    Socket tcpClient = TCPserver.Accept();
+                    TcpserverAccept = TCPserver.Accept();
                     Task.Run(new Action(() =>
                     {
                         ReceiveFromPLC(tcpClient);
@@ -222,10 +254,6 @@ namespace SocketSiemens
 
                 }
             }
-               
-
-          
-
 
         }
 
@@ -238,7 +266,7 @@ namespace SocketSiemens
                 byte[] buffer = new byte[1024 * 10];
                 try
                 {
-                    length = tcpClient.Receive(buffer, SocketFlags.None);
+                    length = TcpserverAccept.Receive(buffer, SocketFlags.None);
                 }
                 catch (Exception)
                 {
@@ -291,10 +319,69 @@ namespace SocketSiemens
             }
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Task.Run(new Action(()=>
+            {
+                ServerWrite();
+            }));
+        }
+
+        private void ServerWrite()
+        {
+            byte[] Summary_buffer = new byte[20];
+            byte[] buffer = { 0, 0, 0, 0 };
+            StrToByte data = new StrToByte();
+            foreach (Control item in this.tabPage2.Controls)
+            {
+                if (item is TextWrite Is)
+                {
+                    if (Is.VarValue != "")
+                    {
+                        buffer = data.StringTobyte(Is.Datatype, Is.VarValue);
+                        for (int i = 0; i < buffer.Length; i++)
+                        {
+                            Summary_buffer[Is.Start + i] = buffer[i];
+
+                        }
+                    }
+
+                }
+
+            }
+            TcpserverAccept.Send(Summary_buffer, SocketFlags.Partial);
+
+        }
+
+
 
 
         #endregion
 
-    
+        private void SocketForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                if (SlientBtn.Text == "关闭服务")
+                {
+                    TCPserver.Close();
+                    ctsServer.Cancel();
+                }
+                if (btnConnect.Text == "断开")
+                {
+                    tcpClient.Close();
+                    ctsClient.Cancel();
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+
+            }
+
+        }
+
+     
     }
 }

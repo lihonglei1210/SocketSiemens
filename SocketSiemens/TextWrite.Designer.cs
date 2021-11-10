@@ -1,7 +1,7 @@
 ﻿
 namespace SocketSiemens
 {
-    partial class TextShow
+    partial class TextWrite
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -36,16 +36,16 @@ namespace SocketSiemens
             // 
             this.textBox1.Location = new System.Drawing.Point(3, 3);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(111, 21);
+            this.textBox1.Size = new System.Drawing.Size(110, 21);
             this.textBox1.TabIndex = 0;
             // 
-            // TextShow
+            // TextWrite
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.textBox1);
-            this.Name = "TextShow";
-            this.Size = new System.Drawing.Size(118, 27);
+            this.Name = "TextWrite";
+            this.Size = new System.Drawing.Size(116, 27);
             this.ResumeLayout(false);
             this.PerformLayout();
 
