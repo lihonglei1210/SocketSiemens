@@ -1,4 +1,7 @@
-﻿using System;
+﻿using MQTTnet;
+using MQTTnet.Protocol;
+using MQTTnet.Server;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,6 +22,33 @@ namespace SocketSiemens
         public SocketForm()
         {
             InitializeComponent();
+
+            var ips = Dns.GetHostAddressesAsync(Dns.GetHostName());
+
+            List<string> listip = new List<string>();
+
+            foreach (var ip in ips.Result)
+            {
+                switch (ip.AddressFamily)
+                {
+
+                    case AddressFamily.InterNetwork:
+                        if (!listip.Contains(ip.ToString()))
+                        {
+                            listip.Add(ip.ToString());
+                        }
+                        break;
+
+                    default:
+                        break;
+                }
+
+            }
+            if (listip.Count>0)
+            {
+                this.com_ServerIP.DataSource = listip;
+                this.com_ServerIP.SelectedIndex = 0;
+            }
 
         }
 
@@ -382,6 +412,98 @@ namespace SocketSiemens
 
         }
 
-     
+        private IMqttServer mqttserever;
+
+        private void btn_mqttServer_Click(object sender, EventArgs e)
+        {
+
+            mqttserever = new MqttFactory().CreateMqttServer();
+
+            //OptionBuilder
+            var optionBuilder = new MqttServerOptionsBuilder();
+
+            optionBuilder.WithConnectionBacklog(10);
+
+            optionBuilder.WithDefaultEndpointPort(Convert.ToInt32(this.tex_mqttPort.Text));
+
+            optionBuilder.WithEncryptedEndpointBoundIPAddress(IPAddress.Parse(this.com_ServerIP.Text));
+
+            MqttServerOptions option = optionBuilder.Build() as MqttServerOptions;
+
+            option.ConnectionValidator += context =>
+            {
+                if (context.Username !="admin") 
+                {
+                    context.ReturnCode = MqttConnectReturnCode.ConnectionRefusedBadUsernameOrPassword;
+
+                    return;
+
+                }
+
+                if (context.Password !="123")
+                {
+                    context.ReturnCode = MqttConnectReturnCode.ConnectionRefusedBadUsernameOrPassword;
+
+                    return;
+
+                }
+                context.ReturnCode = MqttConnectReturnCode.ConnectionAccepted;
+
+
+            };
+
+            mqttserever.ClientConnected += Mqttserever_ClientConnected;
+            mqttserever.ClientDisconnected += Mqttserever_ClientDisconnected;
+            mqttserever.ClientSubscribedTopic += Mqttserever_ClientSubscribedTopic;
+            mqttserever.ClientUnsubscribedTopic += Mqttserever_ClientUnsubscribedTopic;
+            mqttserever.ApplicationMessageReceived += Mqttserever_ApplicationMessageReceived;
+            mqttserever.Started += Mqttserever_Started;
+            mqttserever.Stopped += Mqttserever_Stopped;
+
+            mqttserever.StartAsync(option);
+
+
+            
+        }
+
+        private void Mqttserever_Stopped(object sender, EventArgs e)
+        {
+           MessageBox.Show("服务器停止");
+        }
+
+        private void Mqttserever_Started(object sender, EventArgs e)
+        {
+            MessageBox.Show("服务器开启");
+        }
+
+        private void Mqttserever_ApplicationMessageReceived(object sender, MqttApplicationMessageReceivedEventArgs e)
+        {
+           
+        }
+
+        private void Mqttserever_ClientUnsubscribedTopic(object sender, MqttClientUnsubscribedTopicEventArgs e)
+        {
+            
+        }
+
+        private void Mqttserever_ClientSubscribedTopic(object sender, MqttClientSubscribedTopicEventArgs e)
+        {
+            
+        }
+
+        private void Mqttserever_ClientDisconnected(object sender, MqttClientDisconnectedEventArgs e)
+        {
+            
+        }
+
+        private void Mqttserever_ClientConnected(object sender, MqttClientConnectedEventArgs e)
+        {
+            
+        }
+
+        private void btn_mqttstop_Click(object sender, EventArgs e)
+        {
+            mqttserever.StopAsync();
+        }
     }
 }

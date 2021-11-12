@@ -38,12 +38,19 @@ namespace SocketSiemens
             this.IPtextbox = new System.Windows.Forms.TextBox();
             this.btnConnect = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.SerWriteBtn = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.SCPortTextBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.SclintIPTextbox = new System.Windows.Forms.TextBox();
             this.SlientBtn = new System.Windows.Forms.Button();
-            this.SerWriteBtn = new System.Windows.Forms.Button();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.btn_mqttstop = new System.Windows.Forms.Button();
+            this.tex_mqttPort = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.com_ServerIP = new System.Windows.Forms.ComboBox();
+            this.btn_mqttServer = new System.Windows.Forms.Button();
             this.textWrite5 = new SocketSiemens.TextWrite();
             this.textWrite4 = new SocketSiemens.TextWrite();
             this.textWrite3 = new SocketSiemens.TextWrite();
@@ -53,24 +60,26 @@ namespace SocketSiemens
             this.textShow3 = new SocketSiemens.TextShow();
             this.textShow2 = new SocketSiemens.TextShow();
             this.textShow1 = new SocketSiemens.TextShow();
+            this.textWrite10 = new SocketSiemens.TextWrite();
+            this.textWrite9 = new SocketSiemens.TextWrite();
+            this.textWrite8 = new SocketSiemens.TextWrite();
+            this.textWrite7 = new SocketSiemens.TextWrite();
             this.textWrite6 = new SocketSiemens.TextWrite();
             this.textShow5 = new SocketSiemens.TextShow();
             this.textShow6 = new SocketSiemens.TextShow();
             this.textShow7 = new SocketSiemens.TextShow();
             this.textShow8 = new SocketSiemens.TextShow();
-            this.textWrite7 = new SocketSiemens.TextWrite();
-            this.textWrite8 = new SocketSiemens.TextWrite();
-            this.textWrite9 = new SocketSiemens.TextWrite();
-            this.textWrite10 = new SocketSiemens.TextWrite();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(-1, -2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -182,6 +191,16 @@ namespace SocketSiemens
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "SocketServer";
             // 
+            // SerWriteBtn
+            // 
+            this.SerWriteBtn.Location = new System.Drawing.Point(465, 98);
+            this.SerWriteBtn.Name = "SerWriteBtn";
+            this.SerWriteBtn.Size = new System.Drawing.Size(75, 23);
+            this.SerWriteBtn.TabIndex = 14;
+            this.SerWriteBtn.Text = "发送";
+            this.SerWriteBtn.UseVisualStyleBackColor = true;
+            this.SerWriteBtn.Click += new System.EventHandler(this.button2_Click);
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -226,15 +245,75 @@ namespace SocketSiemens
             this.SlientBtn.UseVisualStyleBackColor = true;
             this.SlientBtn.Click += new System.EventHandler(this.SlientBtn_Click);
             // 
-            // SerWriteBtn
+            // tabPage3
             // 
-            this.SerWriteBtn.Location = new System.Drawing.Point(465, 98);
-            this.SerWriteBtn.Name = "SerWriteBtn";
-            this.SerWriteBtn.Size = new System.Drawing.Size(75, 23);
-            this.SerWriteBtn.TabIndex = 14;
-            this.SerWriteBtn.Text = "发送";
-            this.SerWriteBtn.UseVisualStyleBackColor = true;
-            this.SerWriteBtn.Click += new System.EventHandler(this.button2_Click);
+            this.tabPage3.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage3.Controls.Add(this.btn_mqttstop);
+            this.tabPage3.Controls.Add(this.tex_mqttPort);
+            this.tabPage3.Controls.Add(this.label6);
+            this.tabPage3.Controls.Add(this.label5);
+            this.tabPage3.Controls.Add(this.com_ServerIP);
+            this.tabPage3.Controls.Add(this.btn_mqttServer);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(577, 294);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "MQTT";
+            // 
+            // btn_mqttstop
+            // 
+            this.btn_mqttstop.Location = new System.Drawing.Point(466, 67);
+            this.btn_mqttstop.Name = "btn_mqttstop";
+            this.btn_mqttstop.Size = new System.Drawing.Size(75, 23);
+            this.btn_mqttstop.TabIndex = 6;
+            this.btn_mqttstop.Text = "关闭服务";
+            this.btn_mqttstop.UseVisualStyleBackColor = true;
+            this.btn_mqttstop.Click += new System.EventHandler(this.btn_mqttstop_Click);
+            // 
+            // tex_mqttPort
+            // 
+            this.tex_mqttPort.Location = new System.Drawing.Point(321, 26);
+            this.tex_mqttPort.Name = "tex_mqttPort";
+            this.tex_mqttPort.Size = new System.Drawing.Size(123, 21);
+            this.tex_mqttPort.TabIndex = 5;
+            this.tex_mqttPort.Text = "1883";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(232, 29);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(83, 12);
+            this.label6.TabIndex = 4;
+            this.label6.Text = "Server Port：";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(16, 29);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(71, 12);
+            this.label5.TabIndex = 2;
+            this.label5.Text = "Server IP：";
+            // 
+            // com_ServerIP
+            // 
+            this.com_ServerIP.FormattingEnabled = true;
+            this.com_ServerIP.Location = new System.Drawing.Point(93, 26);
+            this.com_ServerIP.Name = "com_ServerIP";
+            this.com_ServerIP.Size = new System.Drawing.Size(121, 20);
+            this.com_ServerIP.TabIndex = 1;
+            // 
+            // btn_mqttServer
+            // 
+            this.btn_mqttServer.Location = new System.Drawing.Point(466, 24);
+            this.btn_mqttServer.Name = "btn_mqttServer";
+            this.btn_mqttServer.Size = new System.Drawing.Size(75, 23);
+            this.btn_mqttServer.TabIndex = 0;
+            this.btn_mqttServer.Text = "启动服务";
+            this.btn_mqttServer.UseVisualStyleBackColor = true;
+            this.btn_mqttServer.Click += new System.EventHandler(this.btn_mqttServer_Click);
             // 
             // textWrite5
             // 
@@ -335,6 +414,50 @@ namespace SocketSiemens
             this.textShow1.TabIndex = 5;
             this.textShow1.VarValue = "";
             // 
+            // textWrite10
+            // 
+            this.textWrite10.Datatype = SocketSiemens.TextWrite.Parse.Float;
+            this.textWrite10.Location = new System.Drawing.Point(325, 175);
+            this.textWrite10.Name = "textWrite10";
+            this.textWrite10.Offset = 0;
+            this.textWrite10.Size = new System.Drawing.Size(116, 27);
+            this.textWrite10.Start = 12;
+            this.textWrite10.TabIndex = 19;
+            this.textWrite10.VarValue = "";
+            // 
+            // textWrite9
+            // 
+            this.textWrite9.Datatype = SocketSiemens.TextWrite.Parse.Float;
+            this.textWrite9.Location = new System.Drawing.Point(325, 208);
+            this.textWrite9.Name = "textWrite9";
+            this.textWrite9.Offset = 0;
+            this.textWrite9.Size = new System.Drawing.Size(116, 27);
+            this.textWrite9.Start = 16;
+            this.textWrite9.TabIndex = 18;
+            this.textWrite9.VarValue = "";
+            // 
+            // textWrite8
+            // 
+            this.textWrite8.Datatype = SocketSiemens.TextWrite.Parse.Float;
+            this.textWrite8.Location = new System.Drawing.Point(325, 142);
+            this.textWrite8.Name = "textWrite8";
+            this.textWrite8.Offset = 0;
+            this.textWrite8.Size = new System.Drawing.Size(116, 27);
+            this.textWrite8.Start = 8;
+            this.textWrite8.TabIndex = 17;
+            this.textWrite8.VarValue = "";
+            // 
+            // textWrite7
+            // 
+            this.textWrite7.Datatype = SocketSiemens.TextWrite.Parse.Float;
+            this.textWrite7.Location = new System.Drawing.Point(325, 76);
+            this.textWrite7.Name = "textWrite7";
+            this.textWrite7.Offset = 0;
+            this.textWrite7.Size = new System.Drawing.Size(116, 27);
+            this.textWrite7.Start = 0;
+            this.textWrite7.TabIndex = 16;
+            this.textWrite7.VarValue = "";
+            // 
             // textWrite6
             // 
             this.textWrite6.Datatype = SocketSiemens.TextWrite.Parse.Float;
@@ -390,50 +513,6 @@ namespace SocketSiemens
             this.textShow8.TabIndex = 10;
             this.textShow8.VarValue = "";
             // 
-            // textWrite7
-            // 
-            this.textWrite7.Datatype = SocketSiemens.TextWrite.Parse.Float;
-            this.textWrite7.Location = new System.Drawing.Point(325, 76);
-            this.textWrite7.Name = "textWrite7";
-            this.textWrite7.Offset = 0;
-            this.textWrite7.Size = new System.Drawing.Size(116, 27);
-            this.textWrite7.Start = 0;
-            this.textWrite7.TabIndex = 16;
-            this.textWrite7.VarValue = "";
-            // 
-            // textWrite8
-            // 
-            this.textWrite8.Datatype = SocketSiemens.TextWrite.Parse.Float;
-            this.textWrite8.Location = new System.Drawing.Point(325, 142);
-            this.textWrite8.Name = "textWrite8";
-            this.textWrite8.Offset = 0;
-            this.textWrite8.Size = new System.Drawing.Size(116, 27);
-            this.textWrite8.Start = 8;
-            this.textWrite8.TabIndex = 17;
-            this.textWrite8.VarValue = "";
-            // 
-            // textWrite9
-            // 
-            this.textWrite9.Datatype = SocketSiemens.TextWrite.Parse.Float;
-            this.textWrite9.Location = new System.Drawing.Point(325, 208);
-            this.textWrite9.Name = "textWrite9";
-            this.textWrite9.Offset = 0;
-            this.textWrite9.Size = new System.Drawing.Size(116, 27);
-            this.textWrite9.Start = 16;
-            this.textWrite9.TabIndex = 18;
-            this.textWrite9.VarValue = "";
-            // 
-            // textWrite10
-            // 
-            this.textWrite10.Datatype = SocketSiemens.TextWrite.Parse.Float;
-            this.textWrite10.Location = new System.Drawing.Point(325, 175);
-            this.textWrite10.Name = "textWrite10";
-            this.textWrite10.Offset = 0;
-            this.textWrite10.Size = new System.Drawing.Size(116, 27);
-            this.textWrite10.Start = 12;
-            this.textWrite10.TabIndex = 19;
-            this.textWrite10.VarValue = "";
-            // 
             // SocketForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -448,6 +527,8 @@ namespace SocketSiemens
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -487,6 +568,13 @@ namespace SocketSiemens
         private TextWrite textWrite9;
         private TextWrite textWrite8;
         private TextWrite textWrite7;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TextBox tex_mqttPort;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox com_ServerIP;
+        private System.Windows.Forms.Button btn_mqttServer;
+        private System.Windows.Forms.Button btn_mqttstop;
     }
 }
 
