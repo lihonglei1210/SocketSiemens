@@ -431,26 +431,25 @@ namespace SocketSiemens
             MqttServerOptions option = optionBuilder.Build() as MqttServerOptions;
 
             option.ConnectionValidator += context =>
-            {
-                if (context.Username !="admin") 
-                {
-                    context.ReturnCode = MqttConnectReturnCode.ConnectionRefusedBadUsernameOrPassword;
+           {
+               if (context.Username != "admin")
+               {
+                   context.ReturnCode = MqttConnectReturnCode.ConnectionRefusedBadUsernameOrPassword;
 
-                    return;
+                   return;
 
-                }
+               }
 
-                if (context.Password !="123")
-                {
-                    context.ReturnCode = MqttConnectReturnCode.ConnectionRefusedBadUsernameOrPassword;
+               if (context.Password != "123456")
+               {
+                   context.ReturnCode = MqttConnectReturnCode.ConnectionRefusedBadUsernameOrPassword;
 
-                    return;
+                   return;
 
-                }
-                context.ReturnCode = MqttConnectReturnCode.ConnectionAccepted;
+               }
+               context.ReturnCode = MqttConnectReturnCode.ConnectionAccepted;
 
-
-            };
+           };   
 
             mqttserever.ClientConnected += Mqttserever_ClientConnected;
             mqttserever.ClientDisconnected += Mqttserever_ClientDisconnected;
@@ -459,21 +458,18 @@ namespace SocketSiemens
             mqttserever.ApplicationMessageReceived += Mqttserever_ApplicationMessageReceived;
             mqttserever.Started += Mqttserever_Started;
             mqttserever.Stopped += Mqttserever_Stopped;
-
             mqttserever.StartAsync(option);
 
-
-            
         }
 
         private void Mqttserever_Stopped(object sender, EventArgs e)
         {
-           MessageBox.Show("服务器停止");
+           MessageBox.Show("服务器停止","提示",MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
         }
 
         private void Mqttserever_Started(object sender, EventArgs e)
         {
-            MessageBox.Show("服务器开启");
+            MessageBox.Show("服务器开启","提示",MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
         }
 
         private void Mqttserever_ApplicationMessageReceived(object sender, MqttApplicationMessageReceivedEventArgs e)
@@ -483,22 +479,22 @@ namespace SocketSiemens
 
         private void Mqttserever_ClientUnsubscribedTopic(object sender, MqttClientUnsubscribedTopicEventArgs e)
         {
-            
+            MessageBox.Show("客户端取消订阅","提示",MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
         }
 
         private void Mqttserever_ClientSubscribedTopic(object sender, MqttClientSubscribedTopicEventArgs e)
         {
-            
+             MessageBox.Show("客户端启动订阅","提示",MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
         }
 
         private void Mqttserever_ClientDisconnected(object sender, MqttClientDisconnectedEventArgs e)
         {
-            
+            MessageBox.Show("客户端断开连接","提示",MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
         }
 
         private void Mqttserever_ClientConnected(object sender, MqttClientConnectedEventArgs e)
         {
-            
+            MessageBox.Show("客户端已连接","提示",MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
         }
 
         private void btn_mqttstop_Click(object sender, EventArgs e)
