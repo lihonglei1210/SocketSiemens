@@ -1,4 +1,5 @@
 ﻿using MQTTnet;
+using MQTTnet.Client;
 using MQTTnet.Protocol;
 using MQTTnet.Server;
 using System;
@@ -23,6 +24,8 @@ namespace SocketSiemens
         {
             InitializeComponent();
 
+
+
             var ips = Dns.GetHostAddressesAsync(Dns.GetHostName());
 
             List<string> listip = new List<string>();
@@ -44,10 +47,34 @@ namespace SocketSiemens
                 }
 
             }
-            if (listip.Count>0)
+            if (listip.Count > 0)
             {
                 this.com_ServerIP.DataSource = listip;
                 this.com_ServerIP.SelectedIndex = 0;
+            }
+
+        }
+
+        private void SocketForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                if (SlientBtn.Text == "关闭服务")
+                {
+                    TCPserver.Close();
+                    ctsServer.Cancel();
+                }
+                if (btnConnect.Text == "断开")
+                {
+                    tcpClient.Close();
+                    ctsClient.Cancel();
+                }
+
+            }
+            catch (Exception)
+            {
+
+
             }
 
         }
@@ -238,7 +265,7 @@ namespace SocketSiemens
                     MessageBox.Show("服务开启成功");
                     SlientBtn.Text = "关闭服务";
                     TCPserver.Listen(5);
-                    
+
                 }
                 catch (Exception ex)
                 {
@@ -351,7 +378,7 @@ namespace SocketSiemens
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Task.Run(new Action(()=>
+            Task.Run(new Action(() =>
             {
                 ServerWrite();
             }));
@@ -388,29 +415,8 @@ namespace SocketSiemens
 
         #endregion
 
-        private void SocketForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            try
-            {
-                if (SlientBtn.Text == "关闭服务")
-                {
-                    TCPserver.Close();
-                    ctsServer.Cancel();
-                }
-                if (btnConnect.Text == "断开")
-                {
-                    tcpClient.Close();
-                    ctsClient.Cancel();
-                }
+        #region MQttServer
 
-            }
-            catch (Exception ex)
-            {
-
-
-            }
-
-        }
 
         private IMqttServer mqttserever;
 
@@ -449,7 +455,7 @@ namespace SocketSiemens
                }
                context.ReturnCode = MqttConnectReturnCode.ConnectionAccepted;
 
-           };   
+           };
 
             mqttserever.ClientConnected += Mqttserever_ClientConnected;
             mqttserever.ClientDisconnected += Mqttserever_ClientDisconnected;
@@ -460,46 +466,195 @@ namespace SocketSiemens
             mqttserever.Stopped += Mqttserever_Stopped;
             mqttserever.StartAsync(option);
 
+
+
         }
 
         private void Mqttserever_Stopped(object sender, EventArgs e)
         {
-           MessageBox.Show("服务器停止","提示",MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+            MessageBox.Show("服务器停止", "提示");
         }
 
         private void Mqttserever_Started(object sender, EventArgs e)
         {
-            MessageBox.Show("服务器开启","提示",MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+            MessageBox.Show("服务器开启", "提示");
         }
 
         private void Mqttserever_ApplicationMessageReceived(object sender, MqttApplicationMessageReceivedEventArgs e)
         {
-           
+
         }
 
         private void Mqttserever_ClientUnsubscribedTopic(object sender, MqttClientUnsubscribedTopicEventArgs e)
         {
-            MessageBox.Show("客户端取消订阅","提示",MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+            //MessageBox.Show("客户端取消订阅", "提示");
         }
 
         private void Mqttserever_ClientSubscribedTopic(object sender, MqttClientSubscribedTopicEventArgs e)
         {
-             MessageBox.Show("客户端启动订阅","提示",MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+            //MessageBox.Show("客户端启动订阅", "提示");
         }
 
-        private void Mqttserever_ClientDisconnected(object sender, MqttClientDisconnectedEventArgs e)
+        private void Mqttserever_ClientDisconnected(object sender, MQTTnet.Server.MqttClientDisconnectedEventArgs e)
         {
-            MessageBox.Show("客户端断开连接","提示",MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+            //MessageBox.Show("客户端断开连接", "提示");
         }
 
-        private void Mqttserever_ClientConnected(object sender, MqttClientConnectedEventArgs e)
+        private void Mqttserever_ClientConnected(object sender, MQTTnet.Server.MqttClientConnectedEventArgs e)
         {
-            MessageBox.Show("客户端已连接","提示",MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+            //MessageBox.Show("客户端已连接", "提示");
         }
+
+
 
         private void btn_mqttstop_Click(object sender, EventArgs e)
         {
             mqttserever.StopAsync();
+        }
+
+        #endregion
+
+        #region MQTTClient
+
+
+        private IMqttClient MqttClient;
+        private void btn_ClientConnect_Click(object sender, EventArgs e)
+        {
+            //New MqttClient
+            MqttClient = new MqttFactory().CreateMqttClient();
+
+            var option = new MqttClientOptions() { ClientId = Guid.NewGuid().ToString("D") };
+
+            option.ChannelOptions = new MqttClientTcpOptions
+            {
+                Server = this.txt_MQTTServerIP.Text,
+                Port = Convert.ToInt32(this.txt_ServerPort.Text)
+
+            };
+            option.Credentials = new MqttClientCredentials()
+            {
+                Username = this.txt_ClientUnm.Text,
+                Password = this.txt_ClientPWD.Text
+            };
+
+
+
+            MqttClient.Connected += MqttClient_Connected;
+            MqttClient.Disconnected += MqttClient_Disconnected;
+            MqttClient.ApplicationMessageReceived += MqttClient_ApplicationMessageReceived;
+
+            MqttClient.ConnectAsync(option);
+        }
+
+        private void MqttClient_ApplicationMessageReceived(object sender, MqttApplicationMessageReceivedEventArgs e)
+        {
+            Invoke((new Action(() =>
+            {
+                txt_SubscribeContent.AppendText($">>主题：<{e.ApplicationMessage.Topic}>内容：<{Encoding.UTF8.GetString(e.ApplicationMessage.Payload)}>{Environment.NewLine}");
+            })));
+
+        }
+
+        private void MqttClient_Disconnected(object sender, MQTTnet.Client.MqttClientDisconnectedEventArgs e)
+        {
+            MessageBox.Show("断开连接");
+        }
+
+        private void MqttClient_Connected(object sender, MQTTnet.Client.MqttClientConnectedEventArgs e)
+        {
+            MessageBox.Show("连接成功");
+        }
+
+        private List<TopicFilter> topfil = new List<TopicFilter>();
+        private List<string> topfil_string = new List<string>();
+        private void btn_Subscribe_Click(object sender, EventArgs e)
+        {
+         
+            TopicFilter tf = new TopicFilter(this.txt_SubscriptionTopic.Text, MqttQualityOfServiceLevel.AtMostOnce);
+            if (topfil_string.Count > 0)
+            {
+                topfil.Add(tf);
+                foreach (var item in topfil)
+                {
+                    foreach (var item1 in topfil_string)
+                    {
+                        if (!topfil_string.Contains(item.Topic))
+                        {
+                            //cmb_Subscribe.Items.Add(item.Topic);
+                            topfil_string.Add(item.Topic);
+                            break;
+                        }
+                        
+                    }
+
+                }
+            }
+            else
+            {
+                topfil.Add(tf);
+                //cmb_Subscribe.Items.Add(topfil[0].Topic);
+                topfil_string.Add(topfil[0].Topic);
+
+            }
+            BindingSource bs = new BindingSource();
+            bs.DataSource = topfil_string;
+            cmb_Subscribe.DataSource = bs;
+            this.cmb_Subscribe.SelectedIndex = 0;
+            MqttClient.SubscribeAsync(topfil);
+            txt_SubscribeContent.AppendText($"已订阅<{txt_SubscriptionTopic.Text}>主题" + Environment.NewLine);
+
+
+        }
+
+        private void btn_ClientDisconnect_Click(object sender, EventArgs e)
+        {
+            MqttClient.DisconnectAsync();
+        }
+
+
+        #endregion
+
+        private void btn_Publish_Click(object sender, EventArgs e)
+        {
+            var msg = new MqttApplicationMessage
+            {
+                Topic = this.txt_Publish.Text,
+                Payload = Encoding.UTF8.GetBytes(this.txt_PublishContent.Text),
+                QualityOfServiceLevel = MqttQualityOfServiceLevel.AtLeastOnce,
+                Retain = false
+            };
+            MqttClient.PublishAsync(msg);
+        }
+
+        private void btn_Unsubscribe_Click(object sender, EventArgs e)
+        {
+            MqttClient.UnsubscribeAsync(cmb_Subscribe.SelectedItem.ToString());
+            
+            string a = cmb_Subscribe.SelectedItem.ToString();
+            int i = 0;
+            string[] cmbstring = new string[cmb_Subscribe.Items.Count-1];
+            foreach (var item in cmb_Subscribe.Items)
+            {
+                if (item.ToString() != a)
+                {
+                    cmbstring[i] = item.ToString();
+                    i++;
+                }
+
+            }
+            cmb_Subscribe.DataSource = null;
+            cmb_Subscribe.Items.Clear();
+            foreach (var item in cmbstring)
+            {
+                 cmb_Subscribe.Items.Add(item);
+            }
+
+            if (cmb_Subscribe.Items.Count>0)
+            {
+                 cmb_Subscribe.SelectedIndex = 0;
+            }
+
+
         }
     }
 }
