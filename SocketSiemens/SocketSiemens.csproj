@@ -50,6 +50,9 @@
     <Reference Include="thinger.cn.DataConvertHelper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\thinger.cn.DataConvertHelper.3.0.0\lib\net46\thinger.cn.DataConvertHelper.dll</HintPath>
     </Reference>
+    <Reference Include="xktComm, Version=7.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\xktComm.7.0.0\lib\net46\xktComm.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="SocketForm.cs">

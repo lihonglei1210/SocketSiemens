@@ -70,16 +70,18 @@ namespace SocketSiemens
             this.com_ServerIP = new System.Windows.Forms.ComboBox();
             this.btn_mqttServer = new System.Windows.Forms.Button();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.btn_Unsubscribe = new System.Windows.Forms.Button();
-            this.label13 = new System.Windows.Forms.Label();
-            this.txt_PublishContent = new System.Windows.Forms.TextBox();
-            this.txt_SubscribeContent = new System.Windows.Forms.TextBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btn_Publish = new System.Windows.Forms.Button();
-            this.label12 = new System.Windows.Forms.Label();
-            this.txt_Publish = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.txt_SubscriptionTopic = new System.Windows.Forms.TextBox();
+            this.cmb_Subscribe = new System.Windows.Forms.ComboBox();
+            this.txt_PublishContent = new System.Windows.Forms.TextBox();
+            this.btn_Unsubscribe = new System.Windows.Forms.Button();
             this.btn_Subscribe = new System.Windows.Forms.Button();
+            this.label13 = new System.Windows.Forms.Label();
+            this.txt_SubscriptionTopic = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.txt_SubscribeContent = new System.Windows.Forms.TextBox();
+            this.txt_Publish = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.txt_ClientUnm = new System.Windows.Forms.TextBox();
             this.txt_ClientPWD = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -90,12 +92,12 @@ namespace SocketSiemens
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.btn_ClientConnect = new System.Windows.Forms.Button();
-            this.cmb_Subscribe = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -107,7 +109,7 @@ namespace SocketSiemens
             this.tabControl1.Location = new System.Drawing.Point(-1, -2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(585, 322);
+            this.tabControl1.Size = new System.Drawing.Size(585, 344);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -132,7 +134,7 @@ namespace SocketSiemens
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(577, 296);
+            this.tabPage1.Size = new System.Drawing.Size(577, 318);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "SocketClient";
             // 
@@ -310,7 +312,7 @@ namespace SocketSiemens
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(577, 296);
+            this.tabPage2.Size = new System.Drawing.Size(577, 318);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "SocketServer";
             // 
@@ -479,7 +481,7 @@ namespace SocketSiemens
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(577, 296);
+            this.tabPage3.Size = new System.Drawing.Size(577, 318);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "MQTTServer";
             // 
@@ -540,17 +542,7 @@ namespace SocketSiemens
             // tabPage4
             // 
             this.tabPage4.BackColor = System.Drawing.SystemColors.Control;
-            this.tabPage4.Controls.Add(this.cmb_Subscribe);
-            this.tabPage4.Controls.Add(this.btn_Unsubscribe);
-            this.tabPage4.Controls.Add(this.label13);
-            this.tabPage4.Controls.Add(this.txt_PublishContent);
-            this.tabPage4.Controls.Add(this.txt_SubscribeContent);
-            this.tabPage4.Controls.Add(this.btn_Publish);
-            this.tabPage4.Controls.Add(this.label12);
-            this.tabPage4.Controls.Add(this.txt_Publish);
-            this.tabPage4.Controls.Add(this.label11);
-            this.tabPage4.Controls.Add(this.txt_SubscriptionTopic);
-            this.tabPage4.Controls.Add(this.btn_Subscribe);
+            this.tabPage4.Controls.Add(this.groupBox1);
             this.tabPage4.Controls.Add(this.txt_ClientUnm);
             this.tabPage4.Controls.Add(this.txt_ClientPWD);
             this.tabPage4.Controls.Add(this.label9);
@@ -564,48 +556,33 @@ namespace SocketSiemens
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(577, 296);
+            this.tabPage4.Size = new System.Drawing.Size(577, 318);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "MQTTClient";
             // 
-            // btn_Unsubscribe
+            // groupBox1
             // 
-            this.btn_Unsubscribe.Location = new System.Drawing.Point(108, 262);
-            this.btn_Unsubscribe.Name = "btn_Unsubscribe";
-            this.btn_Unsubscribe.Size = new System.Drawing.Size(75, 23);
-            this.btn_Unsubscribe.TabIndex = 28;
-            this.btn_Unsubscribe.Text = "退订";
-            this.btn_Unsubscribe.UseVisualStyleBackColor = true;
-            this.btn_Unsubscribe.Click += new System.EventHandler(this.btn_Unsubscribe_Click);
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(186, 267);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(77, 12);
-            this.label13.TabIndex = 27;
-            this.label13.Text = "已订阅主题：";
-            // 
-            // txt_PublishContent
-            // 
-            this.txt_PublishContent.Location = new System.Drawing.Point(352, 133);
-            this.txt_PublishContent.Multiline = true;
-            this.txt_PublishContent.Name = "txt_PublishContent";
-            this.txt_PublishContent.Size = new System.Drawing.Size(198, 123);
-            this.txt_PublishContent.TabIndex = 25;
-            // 
-            // txt_SubscribeContent
-            // 
-            this.txt_SubscribeContent.Location = new System.Drawing.Point(27, 133);
-            this.txt_SubscribeContent.Multiline = true;
-            this.txt_SubscribeContent.Name = "txt_SubscribeContent";
-            this.txt_SubscribeContent.Size = new System.Drawing.Size(305, 123);
-            this.txt_SubscribeContent.TabIndex = 24;
+            this.groupBox1.Controls.Add(this.btn_Publish);
+            this.groupBox1.Controls.Add(this.cmb_Subscribe);
+            this.groupBox1.Controls.Add(this.txt_PublishContent);
+            this.groupBox1.Controls.Add(this.btn_Unsubscribe);
+            this.groupBox1.Controls.Add(this.btn_Subscribe);
+            this.groupBox1.Controls.Add(this.label13);
+            this.groupBox1.Controls.Add(this.txt_SubscriptionTopic);
+            this.groupBox1.Controls.Add(this.label11);
+            this.groupBox1.Controls.Add(this.txt_SubscribeContent);
+            this.groupBox1.Controls.Add(this.txt_Publish);
+            this.groupBox1.Controls.Add(this.label12);
+            this.groupBox1.Location = new System.Drawing.Point(6, 98);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(562, 217);
+            this.groupBox1.TabIndex = 1;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "数据";
             // 
             // btn_Publish
             // 
-            this.btn_Publish.Location = new System.Drawing.Point(475, 262);
+            this.btn_Publish.Location = new System.Drawing.Point(465, 181);
             this.btn_Publish.Name = "btn_Publish";
             this.btn_Publish.Size = new System.Drawing.Size(75, 23);
             this.btn_Publish.TabIndex = 23;
@@ -613,47 +590,90 @@ namespace SocketSiemens
             this.btn_Publish.UseVisualStyleBackColor = true;
             this.btn_Publish.Click += new System.EventHandler(this.btn_Publish_Click);
             // 
-            // label12
+            // cmb_Subscribe
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(350, 109);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(65, 12);
-            this.label12.TabIndex = 22;
-            this.label12.Text = "发布主题：";
+            this.cmb_Subscribe.FormattingEnabled = true;
+            this.cmb_Subscribe.Location = new System.Drawing.Point(258, 183);
+            this.cmb_Subscribe.Name = "cmb_Subscribe";
+            this.cmb_Subscribe.Size = new System.Drawing.Size(121, 20);
+            this.cmb_Subscribe.TabIndex = 29;
             // 
-            // txt_Publish
+            // txt_PublishContent
             // 
-            this.txt_Publish.Location = new System.Drawing.Point(427, 106);
-            this.txt_Publish.Name = "txt_Publish";
-            this.txt_Publish.Size = new System.Drawing.Size(123, 21);
-            this.txt_Publish.TabIndex = 21;
+            this.txt_PublishContent.Location = new System.Drawing.Point(354, 51);
+            this.txt_PublishContent.Multiline = true;
+            this.txt_PublishContent.Name = "txt_PublishContent";
+            this.txt_PublishContent.Size = new System.Drawing.Size(186, 123);
+            this.txt_PublishContent.TabIndex = 25;
             // 
-            // label11
+            // btn_Unsubscribe
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(25, 111);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(65, 12);
-            this.label11.TabIndex = 20;
-            this.label11.Text = "订阅主题：";
-            // 
-            // txt_SubscriptionTopic
-            // 
-            this.txt_SubscriptionTopic.Location = new System.Drawing.Point(102, 106);
-            this.txt_SubscriptionTopic.Name = "txt_SubscriptionTopic";
-            this.txt_SubscriptionTopic.Size = new System.Drawing.Size(123, 21);
-            this.txt_SubscriptionTopic.TabIndex = 19;
+            this.btn_Unsubscribe.Location = new System.Drawing.Point(97, 181);
+            this.btn_Unsubscribe.Name = "btn_Unsubscribe";
+            this.btn_Unsubscribe.Size = new System.Drawing.Size(75, 23);
+            this.btn_Unsubscribe.TabIndex = 28;
+            this.btn_Unsubscribe.Text = "退订";
+            this.btn_Unsubscribe.UseVisualStyleBackColor = true;
+            this.btn_Unsubscribe.Click += new System.EventHandler(this.btn_Unsubscribe_Click);
             // 
             // btn_Subscribe
             // 
-            this.btn_Subscribe.Location = new System.Drawing.Point(27, 262);
+            this.btn_Subscribe.Location = new System.Drawing.Point(16, 181);
             this.btn_Subscribe.Name = "btn_Subscribe";
             this.btn_Subscribe.Size = new System.Drawing.Size(75, 23);
             this.btn_Subscribe.TabIndex = 18;
             this.btn_Subscribe.Text = "订阅";
             this.btn_Subscribe.UseVisualStyleBackColor = true;
             this.btn_Subscribe.Click += new System.EventHandler(this.btn_Subscribe_Click);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(181, 186);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(71, 12);
+            this.label13.TabIndex = 27;
+            this.label13.Text = "已订阅主题:";
+            // 
+            // txt_SubscriptionTopic
+            // 
+            this.txt_SubscriptionTopic.Location = new System.Drawing.Point(80, 22);
+            this.txt_SubscriptionTopic.Name = "txt_SubscriptionTopic";
+            this.txt_SubscriptionTopic.Size = new System.Drawing.Size(123, 21);
+            this.txt_SubscriptionTopic.TabIndex = 19;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(15, 27);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(59, 12);
+            this.label11.TabIndex = 20;
+            this.label11.Text = "订阅主题:";
+            // 
+            // txt_SubscribeContent
+            // 
+            this.txt_SubscribeContent.Location = new System.Drawing.Point(17, 51);
+            this.txt_SubscribeContent.Multiline = true;
+            this.txt_SubscribeContent.Name = "txt_SubscribeContent";
+            this.txt_SubscribeContent.Size = new System.Drawing.Size(331, 123);
+            this.txt_SubscribeContent.TabIndex = 24;
+            // 
+            // txt_Publish
+            // 
+            this.txt_Publish.Location = new System.Drawing.Point(417, 24);
+            this.txt_Publish.Name = "txt_Publish";
+            this.txt_Publish.Size = new System.Drawing.Size(123, 21);
+            this.txt_Publish.TabIndex = 21;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(352, 29);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(59, 12);
+            this.label12.TabIndex = 22;
+            this.label12.Text = "发布主题:";
             // 
             // txt_ClientUnm
             // 
@@ -665,16 +685,17 @@ namespace SocketSiemens
             // 
             // txt_ClientPWD
             // 
-            this.txt_ClientPWD.Location = new System.Drawing.Point(427, 66);
+            this.txt_ClientPWD.Location = new System.Drawing.Point(327, 66);
             this.txt_ClientPWD.Name = "txt_ClientPWD";
             this.txt_ClientPWD.Size = new System.Drawing.Size(123, 21);
             this.txt_ClientPWD.TabIndex = 16;
             this.txt_ClientPWD.Text = "123456";
+            this.txt_ClientPWD.UseSystemPasswordChar = true;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(350, 69);
+            this.label9.Location = new System.Drawing.Point(250, 69);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(65, 12);
             this.label9.TabIndex = 15;
@@ -699,7 +720,7 @@ namespace SocketSiemens
             // 
             // btn_ClientDisconnect
             // 
-            this.btn_ClientDisconnect.Location = new System.Drawing.Point(257, 64);
+            this.btn_ClientDisconnect.Location = new System.Drawing.Point(471, 64);
             this.btn_ClientDisconnect.Name = "btn_ClientDisconnect";
             this.btn_ClientDisconnect.Size = new System.Drawing.Size(75, 23);
             this.btn_ClientDisconnect.TabIndex = 12;
@@ -709,7 +730,7 @@ namespace SocketSiemens
             // 
             // txt_ServerPort
             // 
-            this.txt_ServerPort.Location = new System.Drawing.Point(427, 23);
+            this.txt_ServerPort.Location = new System.Drawing.Point(327, 23);
             this.txt_ServerPort.Name = "txt_ServerPort";
             this.txt_ServerPort.Size = new System.Drawing.Size(123, 21);
             this.txt_ServerPort.TabIndex = 11;
@@ -718,7 +739,7 @@ namespace SocketSiemens
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(350, 26);
+            this.label7.Location = new System.Drawing.Point(250, 26);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(83, 12);
             this.label7.TabIndex = 10;
@@ -735,7 +756,7 @@ namespace SocketSiemens
             // 
             // btn_ClientConnect
             // 
-            this.btn_ClientConnect.Location = new System.Drawing.Point(257, 21);
+            this.btn_ClientConnect.Location = new System.Drawing.Point(471, 21);
             this.btn_ClientConnect.Name = "btn_ClientConnect";
             this.btn_ClientConnect.Size = new System.Drawing.Size(75, 23);
             this.btn_ClientConnect.TabIndex = 7;
@@ -743,19 +764,11 @@ namespace SocketSiemens
             this.btn_ClientConnect.UseVisualStyleBackColor = true;
             this.btn_ClientConnect.Click += new System.EventHandler(this.btn_ClientConnect_Click);
             // 
-            // cmb_Subscribe
-            // 
-            this.cmb_Subscribe.FormattingEnabled = true;
-            this.cmb_Subscribe.Location = new System.Drawing.Point(269, 264);
-            this.cmb_Subscribe.Name = "cmb_Subscribe";
-            this.cmb_Subscribe.Size = new System.Drawing.Size(121, 20);
-            this.cmb_Subscribe.TabIndex = 29;
-            // 
             // SocketForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(584, 320);
+            this.ClientSize = new System.Drawing.Size(587, 342);
             this.Controls.Add(this.tabControl1);
             this.Name = "SocketForm";
             this.Text = "Socket";
@@ -769,6 +782,8 @@ namespace SocketSiemens
             this.tabPage3.PerformLayout();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -837,6 +852,7 @@ namespace SocketSiemens
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Button btn_Unsubscribe;
         private System.Windows.Forms.ComboBox cmb_Subscribe;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }
 

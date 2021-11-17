@@ -538,7 +538,6 @@ namespace SocketSiemens
             };
 
 
-
             MqttClient.Connected += MqttClient_Connected;
             MqttClient.Disconnected += MqttClient_Disconnected;
             MqttClient.ApplicationMessageReceived += MqttClient_ApplicationMessageReceived;
@@ -550,7 +549,7 @@ namespace SocketSiemens
         {
             Invoke((new Action(() =>
             {
-                txt_SubscribeContent.AppendText($">>主题：<{e.ApplicationMessage.Topic}>内容：<{Encoding.UTF8.GetString(e.ApplicationMessage.Payload)}>{Environment.NewLine}");
+                txt_SubscribeContent.AppendText($">>{DateTime.Now.ToString()}\t主题：<{e.ApplicationMessage.Topic}>{Environment.NewLine}内容：<{Encoding.UTF8.GetString(e.ApplicationMessage.Payload)}>{Environment.NewLine}");
             })));
 
         }
@@ -629,13 +628,15 @@ namespace SocketSiemens
         private void btn_Unsubscribe_Click(object sender, EventArgs e)
         {
             MqttClient.UnsubscribeAsync(cmb_Subscribe.SelectedItem.ToString());
-            
-            string a = cmb_Subscribe.SelectedItem.ToString();
+            topfil_string.Remove(cmb_Subscribe.SelectedItem.ToString());
+           
+            topfil = new List<TopicFilter>();
+
             int i = 0;
             string[] cmbstring = new string[cmb_Subscribe.Items.Count-1];
             foreach (var item in cmb_Subscribe.Items)
-            {
-                if (item.ToString() != a)
+            { 
+                if (item.ToString() != cmb_Subscribe.SelectedItem.ToString())
                 {
                     cmbstring[i] = item.ToString();
                     i++;
@@ -646,7 +647,9 @@ namespace SocketSiemens
             cmb_Subscribe.Items.Clear();
             foreach (var item in cmbstring)
             {
-                 cmb_Subscribe.Items.Add(item);
+                TopicFilter top_remove=new TopicFilter(item,MqttQualityOfServiceLevel.AtMostOnce);
+                cmb_Subscribe.Items.Add(item);
+                topfil.Add(top_remove);
             }
 
             if (cmb_Subscribe.Items.Count>0)
